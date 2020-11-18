@@ -6,7 +6,7 @@ class Monopoly extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: 1,
+      screen: 0,
       player1: 'P1',
       player2: 'P2',
     };
