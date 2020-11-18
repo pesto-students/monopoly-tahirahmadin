@@ -1,10 +1,10 @@
 import './App.css';
-import Game from './screens/Game';
+import Monopoly from './screens/Monopoly';
 
 function App() {
   return (
     <div>
-      <Game />
+      <Monopoly />
     </div>
   );
 }

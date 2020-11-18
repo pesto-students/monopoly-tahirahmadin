@@ -29,7 +29,7 @@ code {
   margin: 2px;
 }
 .columnContainer {
-  height: 50px;
+  height: 48px;
   width: 67px;
   border: 1px solid #000000;
   margin: 2px;
@@ -46,5 +46,12 @@ code {
   margin: 2px;
 }
 .text {
-  font-size: 9px;
+  font-size: 7px;
+}
+.inputbox {
+  width: 30vw;
+  border-radius: 7px;
+  padding: 10px;
+  border: 1px solid #212121;
+  margin: 10px;
 }

@@ -10,6 +10,12 @@ function Blocks() {
     );
   }
 
-  return <div>{gameBlocks.map((element, index) => blockCreator(element, index))}</div>;
+  return (
+    <div>
+      <div className="d-flex flex-row-reverse justify-content-center">
+        {gameBlocks.slice(0, 9).map((element, index) => blockCreator(element, index))}
+      </div>
+    </div>
+  );
 }
 export default Blocks;
