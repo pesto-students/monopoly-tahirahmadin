@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+const gameBlocks = require('./../data/gameBlocks.json');
 class TradeBox extends Component {
   render() {
     return (
@@ -12,6 +12,11 @@ class TradeBox extends Component {
             <button className="btn btn-secondary ml-2" style={{ backgroundColor: '#615cbf', width: '100px' }}>
               Stats
             </button>
+          </div>
+          <div
+            className="d-flex justify-content-center my-2"
+            style={{ height: '60px', width: '100%', border: '1px solid #212121' }}>
+            <div className="mr-1 mt-1">{gameBlocks[this.props.dice1 + this.props.dice2].pricetext}</div>
           </div>
         </div>
       </div>

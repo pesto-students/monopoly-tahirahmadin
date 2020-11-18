@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Dices from './Dices';
 
 class DiceRoller extends Component {
@@ -7,16 +6,8 @@ class DiceRoller extends Component {
     super(props);
     this.state = {
       screen: 1,
-      dice1: 0,
-      dice2: 0,
     };
   }
-
-  handleRollDice = () => {
-    const dice1 = Math.floor(Math.random() * Math.floor(5)) + 1;
-    const dice2 = Math.floor(Math.random() * Math.floor(5)) + 1;
-    this.setState({ dice1, dice2 });
-  };
 
   render() {
     return (
@@ -25,17 +16,17 @@ class DiceRoller extends Component {
           className="d-flex justify-content-center my-2"
           style={{ height: '60px', width: '100%', border: '1px solid #212121' }}>
           <div className="mr-1 mt-1">
-            <Dices dice={this.state.dice1} />
+            <Dices dice={this.props.dice1} />
           </div>
           <div className="ml-1 mt-1">
             {' '}
-            <Dices dice={this.state.dice2} />
+            <Dices dice={this.props.dice2} />
           </div>
         </div>
         <button
           className="btn btn-secondary"
           style={{ backgroundColor: '#615cbf', width: '100px' }}
-          onClick={this.handleRollDice}>
+          onClick={this.props.handleRollDice}>
           Roll dice
         </button>
       </div>
