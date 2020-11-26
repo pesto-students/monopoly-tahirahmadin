@@ -2,35 +2,38 @@ import React, { Component } from 'react';
 import Game from './Game';
 import StartScreen from './StartScreen';
 
+const INITIAL_WALLET_AMOUNT = 1500;
 class Monopoly extends Component {
   constructor(props) {
     super(props);
     this.state = {
       screen: 0,
-      player1: 'P1',
-      player2: 'P2',
+      players: [],
     };
   }
 
-  handleScreen = (value) => {
-    this.setState({ screen: value });
-  };
-  handlePlayerName = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  handlePlayers = (playersName) => {
+    let playersList = [];
+    let colors = ['#405DE6', '#E1306C', '#0277bd', '#ff846d'];
+    playersName.map((player, index) => {
+      if (player !== null) {
+        let singlePlayer = {
+          name: player,
+          amount: INITIAL_WALLET_AMOUNT,
+          position: 0,
+          properties: [],
+          color: colors[index],
+        };
+        playersList.push(singlePlayer);
+      }
+    });
+    this.setState({ players: playersList, screen: 1 });
   };
   render() {
     return (
       <div>
-        {this.state.screen === 0 && (
-          <StartScreen
-            handleScreen={this.handleScreen}
-            screen={this.state.screen}
-            handlePlayerName={this.handlePlayerName}
-          />
-        )}
-        {this.state.screen === 1 && (
-          <Game handleScreen={this.handleScreen} player1={this.state.player1} player2={this.state.player2} />
-        )}
+        {this.state.screen === 0 && <StartScreen handlePlayers={this.handlePlayers} />}
+        {this.state.screen === 1 && <Game handleScreen={this.handleScreen} players={this.state.players} />}
       </div>
     );
   }

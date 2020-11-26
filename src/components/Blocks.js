@@ -1,15 +1,13 @@
 import React from 'react';
 const gameBlocks = require('./../data/gameBlocks.json');
-
+function blockCreator(element, index) {
+  return (
+    <div className="smallContainer">
+      <p className="text">{element.name}</p>
+    </div>
+  );
+}
 function Blocks() {
-  function blockCreator(element, index) {
-    return (
-      <div className="smallContainer">
-        <p className="text">{element.name}</p>
-      </div>
-    );
-  }
-
   return (
     <div>
       <div className="d-flex flex-row-reverse justify-content-center">

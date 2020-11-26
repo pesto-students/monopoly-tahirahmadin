@@ -4,17 +4,19 @@ class TradeBox extends Component {
   render() {
     return (
       <div>
-        <div style={{ borderRadius: 10, border: '1px solid #212121', padding: 10, width: '300px' }} className="mt-5">
+        <div
+          style={{ borderRadius: 10, border: '1px solid #212121', padding: 10, width: '300px' }}
+          className="mt-5 shadow">
           <div className="d-flex flex-row justify-content-center">
             <button
-              className="btn btn-secondary mr-2"
-              style={{ backgroundColor: '#615cbf', width: '100px' }}
+              className="btn btn-secondary mr-2 shadow"
+              style={{ backgroundColor: '#C13584', width: '100px' }}
               onClick={() => this.props.takeAction()}>
               Buy
             </button>
             <button
-              className="btn btn-secondary ml-2"
-              style={{ backgroundColor: '#615cbf', width: '100px' }}
+              className="btn btn-secondary ml-2 shadow"
+              style={{ backgroundColor: '#C13584', width: '100px' }}
               onClick={() => this.props.passAction()}>
               Pass
             </button>

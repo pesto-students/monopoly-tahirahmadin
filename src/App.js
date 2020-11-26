@@ -2,11 +2,7 @@ import './App.css';
 import Monopoly from './screens/Monopoly';
 
 function App() {
-  return (
-    <div>
-      <Monopoly />
-    </div>
-  );
+  return <Monopoly />;
 }
 
 export default App;
