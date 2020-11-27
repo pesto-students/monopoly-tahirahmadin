@@ -2,6 +2,7 @@
   {
     "name": "GO",
     "pricetext": "COLLECT $200 SALARY AS YOU PASS.",
+    "icon": "arrow_icon.png",
     "color": "#FFFFFF",
     "price": "",
     "groupNumber": "",
