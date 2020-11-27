@@ -10,14 +10,16 @@ class TradeBox extends Component {
           <div className="d-flex flex-row justify-content-center">
             <button
               className="btn btn-secondary mr-2 shadow"
+              disabled={!this.props.isRolled}
               style={{ backgroundColor: '#C13584', width: '100px' }}
-              onClick={() => this.props.takeAction()}>
+              onClick={() => this.props.handleBuy()}>
               Buy
             </button>
             <button
               className="btn btn-secondary ml-2 shadow"
+              disabled={!this.props.isRolled}
               style={{ backgroundColor: '#C13584', width: '100px' }}
-              onClick={() => this.props.passAction()}>
+              onClick={() => this.props.handlePass()}>
               Pass
             </button>
           </div>
@@ -25,9 +27,7 @@ class TradeBox extends Component {
             className="d-flex justify-content-center my-2"
             style={{ height: '60px', width: '100%', border: '1px solid #212121' }}>
             <div className="mr-1 mt-1">
-              {this.props.dice1 === -1
-                ? 'Roll the dice first'
-                : gameBlocks[this.props.dice1 + this.props.dice2].pricetext}
+              {this.props.dice1 === -1 ? 'Roll the dice' : gameBlocks[this.props.dice1 + this.props.dice2].pricetext}
             </div>
           </div>
         </div>

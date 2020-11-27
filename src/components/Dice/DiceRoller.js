@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import LandedCard from '../LandedCard';
 import Dices from './Dices';
 
 class DiceRoller extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isRolled: false,
-    };
-  }
-
   render() {
     return (
       <div style={{ borderRadius: 10, border: '1px solid #212121', padding: 10 }} className="mt-5 m-2 shadow">

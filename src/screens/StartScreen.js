@@ -30,7 +30,7 @@ export default class StartScreen extends Component {
             <option value="3">3</option>
             <option value="4">4</option>
           </select>
-          {[...Array(2)].map((e, i) => (
+          {Array.apply(null, { length: this.state.playersCount }).map((e, i) => (
             <div class="form-group mt-2">
               <label for="exampleInputEmail1" style={{ color: 'white' }}>
                 Player {i + 1}

@@ -50,10 +50,23 @@ function Game(props) {
             return (
               gameBlocks[player.position] === element && (
                 <div>
-                  <i class="fa fa-male" style={{ color: player.color, fontSize: '20px' }}></i>
+                  <i class="fa fa-male" style={{ color: player.color, fontSize: '20px', zIndex: 100 }}></i>
                 </div>
               )
             );
+          })}
+        </div>
+        <div style={{ position: 'relative', top: 40 }}>
+          {props.players.map((player, index) => {
+            return player.properties.map((property) => {
+              if (property.name === element.name) {
+                return (
+                  <div>
+                    <div style={{ height: 10, width: '100%', backgroundColor: player.color }}></div>
+                  </div>
+                );
+              }
+            });
           })}
         </div>
       </div>
@@ -91,38 +104,55 @@ function Game(props) {
   function handleSpot(move) {
     props.players.map((player, index) => {
       if (turnOf === index) {
-        player.position = player.position + move;
+        if (player.position + move > gameBlocks.length) {
+          player.position = (player.position + move) % gameBlocks.length;
+        } else {
+          player.position = player.position + move;
+        }
       }
       return player;
     });
   }
-
-  const takeAction = () => {
-    // let cost =
-    //   gameBlocks[dice1 + dice2].price === '' ? gameBlocks[dice1 + dice2 - 1].price : gameBlocks[dice1 + dice2].price;
-    // if (turnOf === 1) {
-    //   let spotValue = spot1 + dice1 + dice2;
-    //   setMoney1(money1 - cost);
-    //   console.log(gameBlocks.length);
-    //   setSpot1(spotValue / gameBlocks.length >= 1 ? spotValue % gameBlocks.length : spotValue);
-    //   setTurnOf(2);
-    // } else {
-    //   let spotValue = spot2 + dice1 + dice2;
-    //   setMoney2(money2 - gameBlocks[dice1 + dice2].price);
-    //   setSpot2(spotValue / gameBlocks.length >= 1 ? spotValue % gameBlocks.length : spotValue);
-    //   setTurnOf(1);
-    // }
-  };
-  const passAction = () => {
-    if (turnOf === 1) {
-      setTurnOf(2);
+  const handleTurn = () => {
+    if (turnOf < props.players.length - 1) {
+      setTurnOf(turnOf + 1);
     } else {
-      setTurnOf(1);
+      setTurnOf(0);
     }
   };
+  const handleBuy = () => {
+    let currentPlayerPosition = props.players[turnOf].position;
+    let cost =
+      gameBlocks[props.players[turnOf].position].price === ''
+        ? gameBlocks[props.players[turnOf].position - 1].price
+        : gameBlocks[props.players[turnOf].position].price;
+    let propertyObject = {
+      name: gameBlocks[currentPlayerPosition].name,
+      price: cost,
+    };
+
+    props.players.map((player, index) => {
+      if (turnOf === index) {
+        player.properties.push(propertyObject);
+
+        player.amount = player.amount - cost;
+      }
+      return player;
+    });
+    handleTurn();
+    setIsRolled(false);
+    setDice1(-1);
+    setDice2(-1);
+  };
+  const handlePass = () => {
+    handleTurn();
+    setIsRolled(false);
+    setDice1(-1);
+    setDice2(-1);
+  };
   return (
-    <div className="App fluid-container d-flex justify-content-between">
-      <div for="left">
+    <div className="App container-fluid  d-flex justify-content-between" style={{ width: '100vw' }}>
+      <div for="left" style={{ width: '10vw' }}>
         <button
           className="btn btn-secondary shadow"
           style={{ color: 'white', position: 'absolute', bottom: 30, left: 10 }}
@@ -147,7 +177,7 @@ function Game(props) {
             ) : (
               <TurnIndicator turnOf={turnOf} />
             )}
-            <TradeBox dice1={dice1} dice2={dice2} takeAction={takeAction} passAction={passAction} />
+            <TradeBox dice1={dice1} dice2={dice2} handleBuy={handleBuy} handlePass={handlePass} isRolled={isRolled} />
           </div>
           <div for="rightColumn" className="d-flex flex-column">
             {gameBlocks.slice(31, 40).map((element, index) => columnCreator(element, index))}
@@ -158,15 +188,15 @@ function Game(props) {
         </div>
       </div>
 
-      <div style={{ backgroundColor: 'white', height: '100%' }}>
+      <div style={{ backgroundColor: 'white', height: '100%', marginTop: 10 }}>
         <h3>Players</h3>
         <hr />
         <div className="d-flex flex-column justify-content-between">
           {props.players.map((player, index) => {
             return (
-              <div style={{ width: '100%' }}>
-                <h6 style={turnOf === index ? styles.turn : styles.notTurn}>
-                  {turnOf === index ? '-> ' : ''}
+              <div style={{ minWidth: 200 }}>
+                <h6 className="text-left" style={turnOf === index ? styles.turn : styles.notTurn}>
+                  <span style={{ color: player.color }}> {turnOf === index ? '-> ' : ''}</span>
                   {player.name}( {player.amount})
                 </h6>
               </div>
